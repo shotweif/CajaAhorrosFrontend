@@ -4,7 +4,7 @@ import NavBar from "../NavBar";
 
 const Home: React.FC = () => {
     const { logout } = useAuth();
-
+ 
     return (
         <div className="w-full text-center">
             {/* Header */}
