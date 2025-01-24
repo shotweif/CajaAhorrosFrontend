@@ -12,22 +12,21 @@ function App() {
   return (
     <>
       <Router>
-        <main className=''>
+        <main className='bg-slate-100 min-h-screen'>
           <Routes>
             <Route path="/login"
-              element={isAuthenticated ? <Navigate to="/" /> : <Signup />}
+              element={isAuthenticated ? <Home /> : <Signup />}
             />
 
             <Route path="/"
               element={
-                // <PrivateRoute>
                 <Home />
-                // </PrivateRoute>
               }
             />
             
+            {/* Rutas Protegidas */}
             <Route
-              path="/profile"
+              path="/profile/:id"
               element={
                 <PrivateRoute>
                   <Profile />

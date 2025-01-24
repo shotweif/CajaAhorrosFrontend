@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { navPath } from "../utility/DomLocation"
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -11,15 +12,18 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
 
-    const login = (token: string) => {
+    const login = (data: any) => {
+        console.log(data);
+        const { token, userWebId } = data
         localStorage.setItem("token", token);
+        sessionStorage.setItem("user", userWebId);
         setIsAuthenticated(true);
     };
 
     const logout = () => {
         localStorage.removeItem("token");
-        location.href = "/login";
         setIsAuthenticated(false);
+         // location.href = "/login";
     };
 
     return (

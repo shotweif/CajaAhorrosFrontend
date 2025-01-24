@@ -1,0 +1,51 @@
+            {/* {!isOpenNow ?
+                <>
+                    <section className='w-full min-h-[300px] flex flex-col items-center justify-center'>
+                        <img src={noAccount} alt="" className='w-64 opacity-50' />
+                        <h2 className='text-lg font-semibold text-gray-600'>
+                            Solicita la apertura de tu cuenta ya! :D
+                        </h2>
+                        <button className='p-2 px-4 mt-5 bg-purple-800 hover:bg-purple-600 rounded-md text-sm text-white transition-all'
+                            onClick={() => setIsOpenNow(true)}>
+                            Open now
+                        </button>
+                    </section>
+                </> :
+                <>
+                    {/* Abrir nueva cuenta /}
+                    <section className='w-full flex flex-col p-8 bg-white rounded-md shadow relative'>
+                        <button className='h-10 absolute top-2 left-2 flex items-center text-gray-500'
+                        onClick={() => setIsOpenNow(false)}>
+                            <ChevronLeft className="h-full " /> Back
+                        </button>
+                        
+                        <h2 className='text-lg font-bold mt-4'>Open a Savings Account.</h2>
+                        <p className='mb-4'>Welcome to <strong>BankNet</strong>. Before proceeding with opening your savings account,
+                        it is important that you read and accept the following terms and conditions:</p>
+                        
+                        <h3 className='ml-2 font-semibold'>1. Account Usage:</h3>
+                        <p className='ml-6 mb-2'>The savings account is designed exclusively for the management of personal funds and may not be used for illegal, commercial or business purposes.</p>
+
+                        <h3 className='ml-2 font-semibold'>2. Information Security:</h3>
+                        <p className='ml-6'> * It is your responsibility to maintain the confidentiality of your password and personal data.</p>
+                        <p className='ml-6 mb-2'> * If you notice any suspicious activity on your account, please notify us immediately.</p>
+
+                        <h3 className='ml-2 font-semibold'>3. Privacy:</h3>
+                        <p className='ml-6 mb-2'>Your personal information will only be used to manage your account and comply with applicable legal regulations. Please see our [Privacy Policy] for more details..</p>
+
+                        <h3 className='ml-2 font-semibold'>4. Modifications to the Terms:</h3>
+                        <p className='ml-6 mb-2'>BankNet reserves the right to update these terms at any time. You will be notified of any changes before they become effective.</p>
+
+                        <div className='mt-10'>
+                        <input type="checkbox" name="acepto" id="acepto" onChange={() => isTac(!tac)} />
+                        <label className='ml-2' htmlFor="acepto">Accept the terms and conditions.</label>
+
+                        </div>
+                        <button className={`${!tac ? 'bg-gray-300' : 'bg-purple-500 hover:bg-purple-400'} mt-6  text-white rounded-md p-2 px-4`}
+                        disabled={!tac} onClick={() => createNewAccount()}>
+                            Continue
+                        </button>
+
+                    </section>
+                </>
+            } */}
