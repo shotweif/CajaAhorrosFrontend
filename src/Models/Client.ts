@@ -1,6 +1,7 @@
 export interface Client {
     CorreoElectronico: string;
     Nombre: string;
+    Apellido:string;
     Phone: string;
     Password: string;
     Rol: string;

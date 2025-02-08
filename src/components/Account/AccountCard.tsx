@@ -14,16 +14,16 @@ const AccountCard: React.FC<AccountCardProps> = ({ dataAccount }) => {
 
     return (
         <div className='grid grid-cols-1 xl:grid-cols-2 bg-white rounded-md p-4 shadow'>
-            <div className=''>
+            <div className='' id='AccountBalance'>
                 <div className="text-3xl font-bold">${dataAccount.saldo}</div>
-                <p className="text-sm text-muted-foreground">Current Balance</p>
+                <p className=" mb-4 xl:mb-0 text-sm text-muted-foreground">Current Balance</p>
             </div>
 
-            <div className="grid grid-cols-1 space-y-2 xl:space-y-0 xl:grid-cols-2 xl:justify-end text-sm">
-                <div className="flex xl:flex-col justify-between">
+            <div className="grid grid-cols-1 jus space-y-2 xl:space-y-0 xl:grid-cols-2 xl:justify-end text-sm" id='AccountNumber'>
+                <div className="flex flex-col md:flex-row xl:flex-col justify-between">
                     <span>Transactional Account</span>
                     <div className='flex items-center'>
-                        <span className="font-medium">Nro</span>
+                        <span className="font-semibold">Nro</span>
                         <span className="ml-2">{numberAccount}</span>
                         <button className=''></button>
                     <button className='ml-2 w-4 h-4 text-gray-400'
@@ -32,7 +32,7 @@ const AccountCard: React.FC<AccountCardProps> = ({ dataAccount }) => {
                     </button>
                     </div>
                 </div>
-                <div className="flex xl:flex-col justify-between">
+                <div className="flex xl:flex-col justify-between " id='StatusAccountBar'>
                     <span>Account status</span>
                     <div className="font-medium flex items-center">
                         {dataAccount.activo ?

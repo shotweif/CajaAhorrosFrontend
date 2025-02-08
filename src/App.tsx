@@ -7,12 +7,12 @@ import Signup from './pages/users/Signup';
 import Home from './pages/home/Home';
 
 function App() {
-  const { isAuthenticated } = useAuth();
+  let { isAuthenticated } = useAuth();
 
   return (
     <>
       <Router>
-        <main className='bg-slate-100 min-h-screen'>
+        <main className='bg-gray-100 min-h-screen'>
           <Routes>
             <Route path="/login"
               element={isAuthenticated ? <Home /> : <Signup />}
@@ -26,7 +26,7 @@ function App() {
             
             {/* Rutas Protegidas */}
             <Route
-              path="/profile/:id"
+              path="/profile/:id" // path="/profile/:id"
               element={
                 <PrivateRoute>
                   <Profile />

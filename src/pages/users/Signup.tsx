@@ -6,15 +6,6 @@ import LoginForm from "../../components/FormClient/LoginForm";
 import NavBar from "../NavBar";
 import Loading from "../../components/load/Loading";
 
-// window.onload = async () =>{
-//     if(sessionStorage.user) {
-//         const user = JSON.parse(sessionStorage.user);
-//         if(await VerifyUser(user.authToken, user.email)){
-//             location.replace('/');
-//         }
-//     }
-// }
-
 const Signup: React.FC = () => {
     const [isLogin, setIsLogon] = useState(true);
     const [isWating, setIsWating] = useState(false);

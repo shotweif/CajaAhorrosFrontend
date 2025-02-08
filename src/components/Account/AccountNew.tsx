@@ -17,16 +17,19 @@ const AccountNew: React.FC<AccountNewProps> = ({ clienteId, OnClickNewAccount, m
     const createNewAccount = async () => {
         try {
             loadState(true);
+            console.log('enviado a crear')
             const { success } = await CreateAccountsUser(clienteId);
             // console.log(accounts);
             setTimeout(() => {
                 setCreateSuccess(success);
+                loadState(false);
             }, 2500);
 
         } catch (error: any) {
             console.error("Error al cargar el perfil:", error.response?.data || error.message);
         }
-        loadState(false);
+
+        
     };
 
     return (

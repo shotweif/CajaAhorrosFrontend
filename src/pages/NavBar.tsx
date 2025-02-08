@@ -22,7 +22,7 @@ const NavBar: React.FC = () => {
     }
 
     return (
-        <div className="w-full h-16 grid grid-cols-2 px-2 bg-[#4e2b5c] text-white text-lg">
+        <div className="w-full h-16 grid grid-cols-2 px-2 bg-[#4e2b5c] text-white text-lg z-50">
             <div className="col-span-1 w-full flex items-center justify-start gap-3">
                 {/* Logo */}
                 <div className="flex items-center mr-2">
@@ -51,7 +51,7 @@ const NavBar: React.FC = () => {
                         <button className="w-10 h-10">
                             <Settings className="w-5" />
                         </button>
-                        <button className="w-10 h-10 rounded-lg bg-[#ffffff70] flex items-center justify-center" onClick={() => navigate(`/profile/${sessionStorage.getItem}`)}>
+                        <button className="w-10 h-10 rounded-lg bg-[#ffffff70] flex items-center justify-center" onClick={() => locate(`/profile/${sessionStorage.getItem('user')}`)}>
                             <User2 className="w-5" />
                         </button>
                     </>
@@ -60,7 +60,6 @@ const NavBar: React.FC = () => {
                     {!isAuthenticated ?
                         <a href="/login" className="px-3">Login / Signup</a> :
                         <LogoutUser />
-
                     }
                 </div>
             </div>

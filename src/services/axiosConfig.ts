@@ -29,7 +29,7 @@ api.interceptors.request.use(
             config.headers.Authorization = `Bearer ${Token}`;
             
             // Debugging
-            console.log('Header de autorización:', config.headers.Authorization);
+            // console.log('Header de autorización:', config.headers.Authorization);
         } else {
             console.warn('No se encontró token en localStorage');
         }

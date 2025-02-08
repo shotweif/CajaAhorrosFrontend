@@ -3,74 +3,67 @@ import api from "./axiosConfig";
 
 // const BACKEND_ENDPOINT = import.meta.env.VITE_BACKENDPOINT;
 
+//---- SECCION DE ACCIONES DEL USUARIO----//
 // **Crear usuario**
 export const SignupUser = async (client: Client) => {
     const response = await api.post(`Clientes/Register`, client);
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
 }
 
 // **Iniciar sesión**
 export const LoginUser = async (client: LoginRequest) => {
     const response = await api.post("/Clientes/Login", client);
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
 };
-
-// **Obtener perfil de usuario**
-// export const getUserProfile = async () => {
-//     try {
-//         const response = await api.get("/Clientes/Perfil");
-//         return response.data;
-
-//     } catch (error) {
-//         if (axios.isAxiosError(error)) {
-//             console.error('Error al obtener perfil:', {
-//                 status: error.response?.status,
-//                 data: error.response?.data,
-//                 headers: error.response?.headers
-//             });
-            
-//             // Si es error de autenticación
-//             if (error.response?.status === 401) {
-//                 throw new Error('No autorizado. Por favor, inicie sesión nuevamente.');
-//             }
-//         }
-//         throw error;
-//     }
-// };
 
 // **Obtener perfil de usuario**
 export const getUserProfile = async (userWebId: string) => {
     const response = await api.get(`/Clientes/Perfil/${userWebId}`,);
+    // console.log(response.data);
+    return response.data;
+};
+
+//---- SECCION DE ACCIONES EN LAS CUENTAS DEL USUARIO----//
+// **Se crea la cuenta del usuario**
+export const CreateAccountsUser = async (userId: number) => {
+    const response = await api.post(`/CuentaAhorro/CrearCuenta/${userId}`,);
     return response.data;
 };
 
 // **Obtener las cuentas del usuario**
-export const CreateAccountsUser = async (userId: number) => {
-    const response = await api.post(`/Clientes/CrearCuenta/${userId}`,);
-    return response.data;
-};
-
 export const getAccountsUser = async (userId: number) => {
-    const response = await api.get(`/Clientes/ConsultarCuentas/${userId}`,);
+    const response = await api.get(`/CuentaAhorro/ConsultarCuentas/${userId}`,);
     return response.data;
 };
 
+// **Se valida que la cuenta exista**
 export const validateAccount = async (accountNumber: string) => {
-    const response = await api.get(`/Clientes/Validar/${accountNumber}`,);
-    console.log(response.data)
+    const response = await api.get(`/CuentaAhorro/Validar/${accountNumber}`,);
+    // console.log(response.data)
     return response.data;
-    // console.log(accountNumber);
-    // return true;
 };
 
+// **Se realiza la transaccion**
 export const startTransfer = async (transferencia: any) => {
-    console.log('se va a realizar: ', transferencia);
-    const response = await api.post("/Clientes/IniciarTransferencia",  transferencia );
-    console.log('llego: ', response.data);
+    const response = await api.put("/CuentaAhorro/IniciarTransferencia",  transferencia );
     return response.data;
 };
+
+// **Obtenemos el historial de transacciones**
+export const getUserTransacctons = async (userId: number) => {
+    const response = await api.get(`/CuentaAhorro/SummaryTransactions/${userId}`,);
+    return response.data;
+};
+// **Obtenemos el historial de transacciones por filtro**
+export const postUserTransacctonsFilter = async (userId: number, dateFilter: string, accountFilter: string) => {
+    const filterData = {dateFilter, accountFilter}
+    const response = await api.post(`/CuentaAhorro/SummaryTransactionsFilter/${userId}`,  filterData);
+    return response.data.value;
+};
+
+
 
 // **Actualizar perfil del usuario**
 export const updateUserProfile = async (profileData: any) => {
