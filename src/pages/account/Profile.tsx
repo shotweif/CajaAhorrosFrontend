@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getUserProfile, getAccountsUser, updateUserProfile } from "../../services/apiClient";
+import { getUserProfile, getAccountsUser } from "../../services/apiClient";
 import NavBar from "../NavBar";
 import AccountOverview from "../../components/Account/AccountOverview";
-import { BadgeDollarSign, ChevronLeftCircle, ChevronRight, ChevronRightCircle, FileText, LockKeyhole, Settings, Wallet } from "lucide-react";
+import { BadgeDollarSign, ChevronRight, ChevronRightCircle, FileText, LockKeyhole, Wallet } from "lucide-react";
 import Loading from "../../components/load/Loading";
 import Transfer from "../../components/Account/Transfer";
 import { useAuth } from "../../contexts/AuthContext";
 import profileImage from '../../assets/image/jinx.jpg';
 import { CuentaCliente } from '../../Models/Acount';
-import { Client } from '../../Models/Client';
+// import { Client } from '../../Models/Client';
 import HistorialTransact from "../../components/History/HistorialTransact";
 import AdminPage from "../admin/AdminPafe";
 // kenneth@banknet.com
@@ -20,7 +20,7 @@ const Profile: React.FC = () => {
     const [profileData, setProfileData] = useState<any>(null);
     const [cuentas, setGetCuentas] = useState<CuentaCliente[]>([]);
 
-    const [editing, setEditing] = useState(false);
+    // const [editing, setEditing] = useState(false);
     const [optionSelect, setOptionSelect] = useState<number>(1);
 
     const [openSubMenu, setOpenSubMenu] = useState<boolean>(false);
@@ -59,16 +59,16 @@ const Profile: React.FC = () => {
         setOptionSelect(option);
     }
 
-    const handleSave = async () => {
-        try {
-            if (profileData) {
-                await updateUserProfile(profileData); // Llama a la función de Axios
-                setEditing(false);
-            }
-        } catch (error: any) {
-            console.error("Error al actualizar el perfil:", error.response?.data || error.message);
-        }
-    };
+    // const handleSave = async () => {
+    //     try {
+    //         if (profileData) {
+    //             await updateUserProfile(profileData); // Llama a la función de Axios
+    //             setEditing(false);
+    //         }
+    //     } catch (error: any) {
+    //         console.error("Error al actualizar el perfil:", error.response?.data || error.message);
+    //     }
+    // };
 
     return (
         <>

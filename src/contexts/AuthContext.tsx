@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from "react";
-import { navPath } from "../utility/DomLocation"
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -23,7 +22,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const logout = () => {
         localStorage.removeItem("token");
         setIsAuthenticated(false);
-         // location.href = "/login";
+        location.href = "/";
+        location.reload();
     };
 
     return (

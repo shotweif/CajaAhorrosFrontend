@@ -12,7 +12,7 @@ const NavBar: React.FC = () => {
     const Paths = [
         { path: '/', name: 'Inicio' , icon: <Home className="w-full h-full" /> },
         { path: '/banknet', name: 'Informacion', icon: <Landmark className="w-full h-full" /> },
-        { path: '/about-ours', name: 'Sobre nosotros', icon: <HandHeart className="w-full h-full" /> }
+        { path: '/about-us', name: 'Sobre nosotros', icon: <HandHeart className="w-full h-full" /> }
     ]
     const navigate = useNavigate();
     const location = useLocation();
