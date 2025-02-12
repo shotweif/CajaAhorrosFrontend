@@ -1,17 +1,18 @@
 import { Check, CheckCircle, ChevronLeftCircle, Loader2, X } from 'lucide-react';
-import { validateAccount, startTransfer } from "../../services/apiClient";
-import React, { useState } from 'react';
+import { validateAccount, startTransfer, getAccountsUser } from "../../services/apiClient";
+import React, { useEffect, useState } from 'react';
 import { CuentaCliente } from '../../Models/Acount';
 
 interface TransferProps {
-    cuentas: CuentaCliente[];
+    idCliente: number;
     nombreUsuario: string;
     handleOptionClick: (option: number) => void;
 }
 
-const Transfer: React.FC<TransferProps> = ({ cuentas, nombreUsuario, handleOptionClick }) => {
-    const [selectedAccount, setSelectedAccount] = useState<any>(cuentas[0]);
+const Transfer: React.FC<TransferProps> = ({ idCliente, nombreUsuario, handleOptionClick }) => {
+    const [selectedAccount, setSelectedAccount] = useState<any>([]);
     const [accountNumber, setAccountNumber] = useState<string>('');
+    const [cuentas, setGetCuentas] = useState<CuentaCliente[]>([]);
 
     const [validateRes, setValidateRes] = useState<boolean>(false);
     const [toTransfier, setToTransfier] = useState<string>('');
@@ -24,10 +25,13 @@ const Transfer: React.FC<TransferProps> = ({ cuentas, nombreUsuario, handleOptio
     const [valueTransfer, setValueTransfer] = useState<string>('');
     const [stateTransfer, setStateTransfer] = useState<boolean>(false);
 
+    const [dateTransactio, setDateTransaction] = useState('');
+    const [idComprobante, setIdComprobante] = useState('');
 
     const formatAccountNumber = (number: string) => {
         return number.replace(/(\d{4})(?=\d)/g, '$1-');
     };
+
     const ActionMessge = (action: boolean, mesg: string) => {
         setMessage(mesg);
         setIsNotAccount(action);
@@ -35,12 +39,12 @@ const Transfer: React.FC<TransferProps> = ({ cuentas, nombreUsuario, handleOptio
             setTimeout(() => {
                 setIsNotAccount(true);
             }, 3000);
-    }
+    };
 
     const changeAccount = (accountNum: string) => {
         setAccountNumber(accountNum);
         setValidateRes(false);
-    }
+    };
 
     const validateNumber = async () => {
         if (accountNumber.length < 5) {
@@ -67,11 +71,11 @@ const Transfer: React.FC<TransferProps> = ({ cuentas, nombreUsuario, handleOptio
 
         ActionMessge(true, '');
 
-    }
+    };
 
     const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        // const account = cuentas.find(cuenta => cuenta.numeroCuenta === e.target.value);
-        const account = cuentas.find(cuenta => cuenta.numeroCuenta === e.target.value);
+        const value = e.target.value;
+        const account = cuentas.find(cuenta => cuenta.numeroCuenta === value);
 
         setSelectedAccount(account);
     };
@@ -87,9 +91,6 @@ const Transfer: React.FC<TransferProps> = ({ cuentas, nombreUsuario, handleOptio
             setValueTransfer(value);
         }
     };
-
-    const [dateTransactio, setDateTransaction] = useState('');
-    const [idComprobante, setIdComprobante] = useState('');
 
     const tranferSatrt = async () => {
         const changeFormate = accountNumber.split("-").join('');
@@ -112,13 +113,41 @@ const Transfer: React.FC<TransferProps> = ({ cuentas, nombreUsuario, handleOptio
             monto: parseInt(valueTransfer)
         }
 
-        // console.log('Se comenzara la transaccion')
         const { success, dataRes, newTransferenciaId } = await startTransfer(transferencia);
         setStateTransfer(success);
         setDateTransaction(dataRes);
         setIdComprobante(newTransferenciaId)
+    };
 
-    }
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+
+                const accounts = await getAccountsUser(idCliente);
+                setGetCuentas(accounts.cuentas);
+                // console.log(accounts);
+
+                const activeAccounts = accounts.cuentas.filter((c: { activo: boolean; }) => c.activo);
+                if (accounts.cuentas.length > 0) {
+                    setSelectedAccount(activeAccounts[0]);
+                }
+
+            } catch (error: any) {
+                if (!error.response?.data) {
+                    console.error("Error al cargar el perfil:", error.response?.data || error.message);
+                }
+
+                error.response.data.cuentas ? setGetCuentas(error.response.data.cuentas) : null;
+                console.log(error.response?.data);
+            }
+        };
+
+        fetchProfile();
+        // const activeAccounts = cuentas.filter(c => c.activo);
+        // if (activeAccounts.length > 0) {
+        //     setSelectedAccount(activeAccounts[0]);
+        // }
+    }, []);
 
     return (
         <div className='w-full p-4 bg-white rounded-md shadow flex flex-col gap-y-2 text-sm md:text-base'>
@@ -128,7 +157,7 @@ const Transfer: React.FC<TransferProps> = ({ cuentas, nombreUsuario, handleOptio
             <div className='w-full mb-5'>
                 <h1 className='text-base sm:text-lg lg:text-xl font-semibold'>Available Balance</h1>
                 <h2 className='text-3xl lg:text-6xl font-extralight text-gray-500'>
-                    ${selectedAccount?.saldo}
+                    ${selectedAccount.saldo}
                 </h2>
             </div>
 

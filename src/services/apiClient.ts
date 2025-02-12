@@ -54,8 +54,10 @@ export const startTransfer = async (transferencia: any) => {
 // **Obtenemos el historial de transacciones**
 export const getUserTransacctons = async (userId: number) => {
     const response = await api.get(`/CuentaAhorro/SummaryTransactions/${userId}`,);
+    // console.log(response.data)
     return response.data;
 };
+
 // **Obtenemos el historial de transacciones por filtro**
 export const postUserTransacctonsFilter = async (userId: number, dateFilter: string, accountFilter: string) => {
     const filterData = {dateFilter, accountFilter}
@@ -63,8 +65,41 @@ export const postUserTransacctonsFilter = async (userId: number, dateFilter: str
     return response.data.value;
 };
 
+// **Obtenemos todos los usuarios**
+export const getUsersProfilesConsultation = async (concultation: string) => {
+    const response = await api.get(`/Clientes/AdminConsultation/${concultation}`);
+    // console.log(response.data);
+    return response.data;
+};
+
+// **Elimina usuarios o cuentas**
+export const deleteObjectData = async (idObject: number, tabla: string) => {
+    const response = await api.delete(`/${tabla}/DeleteAction/${idObject}`,);
+    // console.log(response.data);
+    return response.data;
+};
+
+export const putChangeUserPassword = async (idUser: number, newPassword: string) => {
+    const response = await api.post(`/Clientes/ChangePassword/${idUser}`, newPassword);
+    // console.log(response.data);
+    return response.data;
+};
+
+export const putChangeBalance = async (idUser: number, balance: number) => {
+    const response = await api.post(`/Clientes/ChangePassword/${idUser}`, balance);
+    // console.log(response.data);
+    return response.data;
+};
 
 
+// **Cambio el estado de una cuenta**
+export const putNewStatus = async (idObject: number) => {
+    const response = await api.put(`/CuentaAhorro/StatusChange/${idObject}`,);
+    console.log(response.data);
+    return response.data;
+}
+
+//------------------------------------------------------------------------
 // **Actualizar perfil del usuario**
 export const updateUserProfile = async (profileData: any) => {
     const response = await api.put("/Clientes/Perfil", profileData);

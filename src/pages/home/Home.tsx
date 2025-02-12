@@ -1,13 +1,13 @@
 import React from "react";
 import NavBar from "../NavBar";
 // import photo from "../../assets/image/AHORROALAVISTA.png";
-import photo from "../../assets/image/kilian-karger-hXWZJgYjqJI-unsplash.jpg";
-import image1 from "../../assets/image/andre-taissin-Dc2SRspMak4-unsplash.jpg";
-import image2 from "../../assets/image/cardmapr-nl-s8F8yglbpjo-unsplash.jpg";
-import image3 from "../../assets/image/jason-dent-3wPJxh-piRw-unsplash.jpg";
+import photo from "../../assets/image/santuario.jpg";
+// import image1 from "../../assets/image/andre-taissin-Dc2SRspMak4-unsplash.jpg";
+// import image2 from "../../assets/image/cardmapr-nl-s8F8yglbpjo-unsplash.jpg";
+// import image3 from "../../assets/image/jason-dent-3wPJxh-piRw-unsplash.jpg";
 
 
-import { HandCoins, PiggyBank, ShieldCheck } from "lucide-react";
+// import { HandCoins, PiggyBank, ShieldCheck } from "lucide-react";
 import SectioCard from "../../components/HomeComp/SectioCard";
 
 const Home: React.FC = () => {
@@ -15,19 +15,22 @@ const Home: React.FC = () => {
 
     const section = [
         {
-            image: image1, iconos: <PiggyBank className="h-full w-full stroke-[1px]" />, btnMsg: 'Comensemos',
+            // image: image1, iconos: <PiggyBank className="h-full w-full stroke-[1px]" />, 
+            btnMsg: 'Comensemos',
             descripcion: 'Aun no te unes? Guarda tu cash de forma segura.',
             layoutSect: '',
             locationPath: `/profile/${verfLoged}`
         },
         {
-            image: image2, iconos: <HandCoins className="h-full w-full stroke-[1px]" />, btnMsg: 'Iniciar ahora',
+            // image: image2, iconos: <HandCoins className="h-full w-full stroke-[1px]" />, 
+            btnMsg: 'Iniciar ahora',
             descripcion: 'Siguiente paso para darle movimiento a tu dinero.',
             layoutSect: '',
             locationPath: !verfLoged ? '/login':`/profile/${verfLoged}`
         },
         {
-            image: image3, iconos: <ShieldCheck className="h-full w-full stroke-[1px]" />, btnMsg: 'Saver mas',
+            // image: image3, iconos: <ShieldCheck className="h-full w-full stroke-[1px]" />, 
+            btnMsg: 'Saver mas',
             descripcion: 'Seguridad y Tranquilidad con cada movimiento.',
             layoutSect: 'md:col-span-2',
             locationPath: '/security-and-privacity'
@@ -49,7 +52,7 @@ const Home: React.FC = () => {
 
                 <div className="w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                     {section.map((sec, i) => (
-                        <SectioCard pathNav={sec.locationPath} iconCard={sec.iconos} description={sec.descripcion} btnMsg={sec.btnMsg} layoutSect={sec.layoutSect} key={i} />
+                        <SectioCard pathNav={sec.locationPath} iconCard={''} description={sec.descripcion} btnMsg={sec.btnMsg} layoutSect={sec.layoutSect} key={i} />
                     ))}
                 </div>
             </div>

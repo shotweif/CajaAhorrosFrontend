@@ -5,6 +5,10 @@ import { Code, Network, Plug2 } from 'lucide-react';
 import imgi1 from '../../assets/image/jinx.jpg';
 import imgi2 from '../../assets/image/112116494_p0.jpg';
 
+import reactImg from '../../assets/icon/image.png';
+import netcoreImg from '../../assets/icon/image2.png';
+import postgresImg from '../../assets/icon/image3.png';
+
 const AboutUs: React.FC = () => {
     return (
         <div>
@@ -29,9 +33,9 @@ const AboutUs: React.FC = () => {
                 <section className='pt-6 border-t'>
                     <h2 className='text-2xl font-semibold w-full text-center'>Tecnologías Utilizadas</h2>
                     <ul className='w-full flex flex-col gap-2 px-[5%]'>
-                        <li className='flex gap-1 items-center'> <img src="" alt="" className='w-20 h-20 bg-gray-200' /> <strong>React:</strong> Framework para construir interfaces de usuario interactivas.</li>
-                        <li className='flex gap-1 items-center'> <img src="" alt="" className='w-20 h-20 bg-gray-200' /> <strong>.NET Core:</strong> Plataforma de desarrollo de aplicaciones web eficiente y escalable.</li>
-                        <li className='flex gap-1 items-center'> <img src="" alt="" className='w-20 h-20 bg-gray-200' /> <strong>PostgreSQL:</strong> Sistema de gestión de bases de datos relacional robusto y seguro.</li>
+                        <li className='flex gap-1 items-center'> <img src={reactImg} alt="" className='w-20 h-20 bg-gray-200 object-cover' /> <strong>React:</strong> Framework para construir interfaces de usuario interactivas.</li>
+                        <li className='flex gap-1 items-center'> <img src={netcoreImg} alt="" className='w-20 h-20 bg-gray-200 object-cover' /> <strong>.NET Core:</strong> Plataforma de desarrollo de aplicaciones web eficiente y escalable.</li>
+                        <li className='flex gap-1 items-center'> <img src={postgresImg} alt="" className='w-20 h-20 bg-gray-200 object-cover' /> <strong>PostgreSQL:</strong> Sistema de gestión de bases de datos relacional robusto y seguro.</li>
                     </ul>
 
                 </section>
@@ -40,8 +44,8 @@ const AboutUs: React.FC = () => {
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-2 mt-2 text-xs sm:text-sm'>
 
                         <div className='w-full sm:min-w-[400px] p-2 px-[8%] rounded-md bg-white flex flex-col sm:flex-row gap-1 items-center shadow'>
-                            <div className='flex items-center justify-center w-full sm:w-auto pb-[2px] sm:pr-[2px] border-b sm:border-r'>
-                                <img src={imgi1} className='w-36 h-36 bg-white rounded-full object-cover border-2 mr-5' alt="" />
+                            <div className='flex items-center justify-center w-full sm:w-auto pb-[2px] sm:pr-[2px] border-b sm:border-b-0 sm:border-r'>
+                                <img src={imgi1} className='min-w-36 w-36 min-h-36 h-36 bg-white rounded-full object-cover border-2 mr-5' alt="" />
                             </div>
                             <ul className='ml-2'>
                                 <li><strong>Estudiante:</strong> Kenneth Eduardo Tutillo Duarte</li>
@@ -52,8 +56,8 @@ const AboutUs: React.FC = () => {
                         </div>
 
                         <div className='w-full sm:min-w-[400px] p-2 px-[8%] rounded-md bg-white flex flex-col sm:flex-row gap-1 items-center shadow'>
-                            <div className='flex items-center justify-center w-full sm:w-auto pb-[2px] sm:pr-[2px] border-b sm:border-r'>
-                                <img src={imgi2} className='w-36 h-36 bg-white rounded-full object-cover border-2 mr-5' alt="" />
+                            <div className='flex items-center justify-center w-full sm:w-auto pb-[2px] sm:pr-[2px] border-b sm:border-b-0 sm:border-r'>
+                                <img src={imgi2} className='min-w-36 w-36 min-h-36 h-36 bg-white rounded-full object-cover border-2 mr-5' alt="" />
                             </div>
                             <ul className='ml-2'>
                                 <li><strong>Estudiante:</strong> Liseth Estefania Pushug </li>

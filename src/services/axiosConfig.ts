@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
 
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKENDPOINT;
+const BACKEND_ENDPOINT = 'http://localhost:5050/api';
+// const BACKEND_ENDPOINT = import.meta.env.VITE_BACKENDPOINT;
+
 const TIME_OUT = 5000;
 
 const api = axios.create({

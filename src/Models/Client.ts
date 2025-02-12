@@ -1,5 +1,8 @@
 export interface Client {
     CorreoElectronico: string;
+    
+    imageName: string;
+
     Nombre: string;
     Apellido:string;
     Phone: string;

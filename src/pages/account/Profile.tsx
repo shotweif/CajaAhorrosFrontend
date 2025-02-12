@@ -6,12 +6,19 @@ import { BadgeDollarSign, ChevronRight, ChevronRightCircle, FileText, LockKeyhol
 import Loading from "../../components/load/Loading";
 import Transfer from "../../components/Account/Transfer";
 import { useAuth } from "../../contexts/AuthContext";
-import profileImage from '../../assets/image/jinx.jpg';
 import { CuentaCliente } from '../../Models/Acount';
 // import { Client } from '../../Models/Client';
 import HistorialTransact from "../../components/History/HistorialTransact";
 import AdminPage from "../admin/AdminPafe";
 // kenneth@banknet.com
+
+import imgST from '../../assets/image/jinx.jpg';
+import imgLS from '../../assets/image/112116494_p0.jpg';
+import img3 from '../../assets/image/bomb.jpg';
+import img2 from '../../assets/image/pato.jpg';
+import img1 from '../../assets/image/santuario.jpg';
+
+
 
 const Profile: React.FC = () => {
     const { logout } = useAuth();
@@ -21,10 +28,12 @@ const Profile: React.FC = () => {
     const [cuentas, setGetCuentas] = useState<CuentaCliente[]>([]);
 
     // const [editing, setEditing] = useState(false);
-    const [optionSelect, setOptionSelect] = useState<number>(1);
+    const [optionSelect, setOptionSelect] = useState<number>(5);
 
     const [openSubMenu, setOpenSubMenu] = useState<boolean>(false);
     // const profileImage = "";
+
+
 
     useEffect(() => {
         // Obtener los datos del perfil desde el backend
@@ -37,7 +46,7 @@ const Profile: React.FC = () => {
 
                 const accounts = await getAccountsUser(cliente.idCliente);
                 setGetCuentas(accounts.cuentas);
-                // console.log(cliente)
+                console.log(cliente)
 
             } catch (error: any) {
                 if (!error.response?.data) {
@@ -57,6 +66,25 @@ const Profile: React.FC = () => {
     const handleOptionClick = (option: number) => {
         setOpenSubMenu(false);
         setOptionSelect(option);
+    }
+
+    function profileImage(imgName: string) {
+        switch (imgName) {
+            case 'st':
+                return imgST
+
+            case 'ls':
+                return imgLS
+
+            case 'bomb':
+                return img3
+
+            case 'pato':
+                return img2
+
+            default:
+                return img1;
+        }
     }
 
     // const handleSave = async () => {
@@ -94,7 +122,7 @@ const Profile: React.FC = () => {
                                 </button>
 
                                 {/* Account data */}
-                                <img src={profileImage} alt="" className="w-24 h-24 border-2 md:w-36 md:h-36 xl:w-52 xl:h-52 bg-gray-300 rounded-full object-cover" />
+                                <img src={profileImage(profileData.imageName)} alt="" className="w-24 h-24 border-2 md:w-36 md:h-36 xl:w-52 xl:h-52 bg-gray-300 rounded-full object-cover" />
                                 <div className="w-full my-3 text-center">
                                     <div className="text-xl font-medium flex items-center justify-center gap-2 uppercase">
                                         <h2 className="">{profileData.nombre}</h2>
@@ -153,7 +181,7 @@ const Profile: React.FC = () => {
                                     optionSelect === 3 ?
                                         <HistorialTransact idUser={profileData.idCliente} /> :
                                         optionSelect === 2 ?
-                                            <Transfer cuentas={cuentas} nombreUsuario={profileData.nombre + ' ' + profileData.apellido} handleOptionClick={handleOptionClick} /> :
+                                            <Transfer idCliente={profileData.idCliente} nombreUsuario={profileData.nombre + ' ' + profileData.apellido} handleOptionClick={handleOptionClick} /> :
                                             <AccountOverview accountData={cuentas} clienteId={profileData.idCliente} loadState={setIsWating} />
                             }
                         </div>

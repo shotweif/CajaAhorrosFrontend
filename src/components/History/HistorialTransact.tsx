@@ -21,9 +21,12 @@ const HistorialTransact: React.FC<HistorialTransactProps> = ({ idUser }) => {
         setIsWating(false);
         try {
             const historyTransactions = await getUserTransacctons(idUser);
-            setTransactions(historyTransactions.historial);
-            setCuentas(historyTransactions.cuentasDelUsuario);
+            if(historyTransactions.historial) {
+            setTransactions(historyTransactions.historial)
+            setCuentas(historyTransactions.cuentasDelUsuario)
             setSelectedAccount(historyTransactions.cuentasDelUsuario[0])
+        }
+
         } catch (error: any) {
             console.error("Error al cargar el perfil:", error.response?.data || error.message);
         }
@@ -55,7 +58,10 @@ const HistorialTransact: React.FC<HistorialTransactProps> = ({ idUser }) => {
     };
 
     const totalPages = Math.ceil(transactions.length / itemsPerPage);
-    const displayedTransactions = transactions.slice().reverse().slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const displayedTransactions = transactions
+        .slice()
+        .sort((a, b) => new Date(b.fechaTransaccion).getTime() - new Date(a.fechaTransaccion).getTime())
+        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
         <div className='w-full'>
@@ -73,42 +79,51 @@ const HistorialTransact: React.FC<HistorialTransactProps> = ({ idUser }) => {
                                 <input type="date" className="p-2 text-sm rounded-md shadow" value={today} max={todayLimt} onChange={(e) => setToday(e.target.value)} />
                             </div>
                             <div className="flex items-center gap-2">
-                            <select className='p-2 rounded-lg shadow text-sm font-normal' onChange={handleAccountChange}>
-                                {cuentas.map((cuenta, i) => (
-                                    <option key={i} value={cuenta.numeroCuenta}>
-                                        Nro {formatAccountNumber(cuenta.numeroCuenta)}
-                                    </option>
-                                ))}
-                            </select>
-                            <button className='px-3 py-1.5 w-full sm:w-auto text-white bg-green-600 hover:bg-green-500 rounded text-sm transition-all'
-                                type="button"
-                                onClick={consultarFitrado}>
-                                Filtrar
-                            </button>
+                                <select className='p-2 rounded-lg shadow text-sm font-normal' onChange={handleAccountChange}>
+                                    {cuentas.map((cuenta, i) => (
+                                        <option key={i} value={cuenta.numeroCuenta}>
+                                            Nro {formatAccountNumber(cuenta.numeroCuenta)}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button className='px-3 py-1.5 w-full sm:w-auto text-white bg-green-600 hover:bg-green-500 rounded text-sm transition-all'
+                                    type="button"
+                                    onClick={consultarFitrado}>
+                                    Filtrar
+                                </button>
                             </div>
                         </form>
                     </div>
 
-                    <section className='w-full overflow-x-scroll'>
-                        <div className={`w-full grid gap-2 transition-all min-w-[800px]`}>
-                            <div className="w-full p-4 grid gap-2 grid-cols-5 bg-white rounded-md text-sm font-bold">
-                                <h2 className="border-r-2">ID</h2>
-                                <h2 className="border-r-2">Monto</h2>
-                                <h2 className="border-r-2">Origen</h2>
-                                <h2 className="border-r-2">Destino</h2>
-                                <h2>Fecha</h2>
-                            </div>
-                            {displayedTransactions.map((trans, i) => (
-                                <div className="w-full p-4 grid grid-cols-5 bg-white hover:bg-violet-100 cursor-default rounded-md text-sm gap-2" key={i}>
-                                    <h2>{trans.idTransaccion}</h2>
-                                    <h2 className={`${dataMove(trans.idCuentaOrigen)}`}>${trans.monto}</h2>
-                                    <h2>{trans.idCuentaOrigen}</h2>
-                                    <h2>{trans.idCuentaDestino}</h2>
-                                    <h2>{formatDateString(trans.fechaTransaccion)}</h2>
-                                </div>
-                            ))}
-                        </div>
-
+                    <section className='w-full bg-white rounded-md p-4 shadow overflow-x-scroll'>
+                        <table className='w-full text-sm'>
+                            <thead>
+                                <tr className='border-b bg-gray-300'>
+                                    <th className='p-2 text-left'>ID</th>
+                                    <th className='p-2 text-left'>Monto</th>
+                                    <th className='p-2 text-left'>Origen</th>
+                                    <th className='p-2 text-left'>Destino</th>
+                                    <th className='p-2 text-left'>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {displayedTransactions.map((trans, i) => (
+                                    <tr key={i} className='border-b hover:bg-violet-200 cursor-default'>
+                                        <td className='p-2'>{trans.idTransaccion}</td>
+                                        <td className={`p-2 ${dataMove(trans.idCuentaOrigen)}`}>${trans.monto}</td>
+                                        <td className='p-2 uppercase'>
+                                            <p> {trans.nombreCuentaOrigen.apellido} {trans.nombreCuentaOrigen.nombre}</p>
+                                            <p className="text-xs font-extralight"><strong className="font-semibold">Nro</strong> {trans.idCuentaOrigen}</p>
+                                        </td>
+                                        <td className='p-2 uppercase'>
+                                            <p> {trans.nombreCuentaDestino.apellido} {trans.nombreCuentaDestino.nombre}</p>
+                                            <p className="text-xs font-extralight"><strong className="font-semibold">Nro</strong> {trans.idCuentaDestino}</p>
+                                        </td>
+                                        <td className='p-2'>{formatDateString(trans.fechaTransaccion)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </section>
 
                     <div className="flex justify-between items-center mt-4 bottom-4 left-0 bg-white p-2 rounded-md text-sm">

@@ -1,0 +1,11 @@
+
+### Iniciar la aplicacion web ###
+# Instala las librerias
+> npm i
+
+# Ejecuta en la maquina
+> npm run dev 
+
+# Ejecuta en red local (Solo para proyetos con Vite)
+> vite --host
+

@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../NavBar";
 import { ChevronLeft } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import imagen1 from '../../assets/image/andre-taissin-Dc2SRspMak4-unsplash.jpg'
+import imagen1 from '../../assets/image/pato.jpg'
 
 const NotFound: React.FC = () => {
     const navigate = useNavigate();
